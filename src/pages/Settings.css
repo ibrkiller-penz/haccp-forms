@@ -1,0 +1,100 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-bg-secondary);
+}
+
+.settings-header {
+  background-color: white;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.settings-header a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.settings-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.settings-main {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+.settings-section {
+  background-color: white;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.settings-section h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.settings-section p {
+  color: #666;
+  margin: 1rem 0;
+}
+
+.form-group {
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.form-group input[type="text"] {
+  flex: 1;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button-group button {
+  flex: 1;
+}
+
+.settings-danger {
+  border-left: 4px solid #dc3545;
+}
+
+.danger-button {
+  background-color: #dc3545;
+}
+
+.danger-button:hover {
+  background-color: #bb2d3b;
+}
+
+@media (max-width: 768px) {
+  .settings-main {
+    padding: 1rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+}
