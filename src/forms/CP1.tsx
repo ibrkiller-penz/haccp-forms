@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useRecordState } from '../store/records'
 import type { FormProps } from './types'
 import { toKey } from './types'
 import { WEEKDAYS_KO, weekDays, fmtMD } from '../lib/dates'
@@ -11,10 +12,10 @@ interface DayRec { slots: Slot[]; clean: string; cover: string; separate: string
 const emptyDay = (): DayRec => ({ slots: TIMES.map(() => ({ fridge: '', preserve: '', freezer: '' })), clean: '', cover: '', separate: '', sign: '' })
 
 export default function CP1({ date, grayscale, names, holidays, onDateChange }: FormProps) {
-  const [checker, setChecker] = useState(names?.checker ?? '')
-  const [days, setDays] = useState<DayRec[]>(WEEKDAYS_KO.map(emptyDay))
-  const [bigo, setBigo] = useState('')
-  useEffect(() => setChecker(names?.checker ?? ''), [names])
+  const [checker, setChecker] = useRecordState('checker', names?.checker ?? '')
+  const [days, setDays] = useRecordState<DayRec[]>('days', WEEKDAYS_KO.map(emptyDay))
+  const [bigo, setBigo] = useRecordState('bigo', '')
+  useEffect(() => { if (names) setChecker(names.checker) }, [names])
   const week = useMemo(() => (date ? weekDays(date) : null), [date])
 
   const setSlot = (d: number, t: number, k: keyof Slot, v: string) =>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useRecordState } from '../store/records'
 import type { FormProps } from './types'
 import { getSettings } from '../store/settings'
 import '../print.css'
@@ -17,11 +18,11 @@ const ta = (h: number): React.CSSProperties => ({
 
 export default function Form2Summary({ grayscale, names }: FormProps) {
   const cal = getSettings().calendar
-  const [period, setPeriod] = useState(cal ? `${cal.from.replace(/-/g, '. ')}.~${cal.to.replace(/-/g, '. ')}.` : '')
-  const [writer, setWriter] = useState(names?.writer ?? '')
-  const [rows, setRows] = useState<SummaryRow[]>(CATEGORIES.map((category) => ({ category, result: '', improvement: '', note: '' })))
-  const [confirmText, setConfirmText] = useState('')
-  useEffect(() => setWriter(names?.writer ?? ''), [names])
+  const [period, setPeriod] = useRecordState('period', cal ? `${cal.from.replace(/-/g, '. ')}.~${cal.to.replace(/-/g, '. ')}.` : '')
+  const [writer, setWriter] = useRecordState('writer', names?.writer ?? '')
+  const [rows, setRows] = useRecordState<SummaryRow[]>('rows', CATEGORIES.map((category) => ({ category, result: '', improvement: '', note: '' })))
+  const [confirmText, setConfirmText] = useRecordState('confirmText', '')
+  useEffect(() => { if (names) setWriter(names.writer) }, [names])
   const set = (i: number, k: keyof SummaryRow, v: string) => setRows((p) => p.map((r, idx) => (idx === i ? { ...r, [k]: v } : r)))
 
   return (

@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useRecordState } from '../store/records'
 import type { FormProps } from './types'
 import { toKey } from './types'
 import { WEEKDAYS_KO, weekDays, fmtMD } from '../lib/dates'
@@ -23,14 +24,14 @@ const CRITERIA: Record<CP2Variant, [string, string, string]> = {
 }
 
 export default function CP2Base({ variant, date, grayscale, names, holidays, onDateChange }: FormProps & { variant: CP2Variant }) {
-  const [checker, setChecker] = useState(names?.checker ?? '')
-  const [days, setDays] = useState<DayRec[]>(WEEKDAYS_KO.map(emptyDay))
-  const [agent, setAgent] = useState('')
-  const [ppm, setPpm] = useState('')
-  const [residue, setResidue] = useState('')
-  const [residueDate, setResidueDate] = useState('')
-  const [thermo, setThermo] = useState('')
-  useEffect(() => setChecker(names?.checker ?? ''), [names])
+  const [checker, setChecker] = useRecordState('checker', names?.checker ?? '')
+  const [days, setDays] = useRecordState<DayRec[]>('days', WEEKDAYS_KO.map(emptyDay))
+  const [agent, setAgent] = useRecordState('agent', '')
+  const [ppm, setPpm] = useRecordState('ppm', '')
+  const [residue, setResidue] = useRecordState('residue', '')
+  const [residueDate, setResidueDate] = useRecordState('residueDate', '')
+  const [thermo, setThermo] = useRecordState('thermo', '')
+  useEffect(() => { if (names) setChecker(names.checker) }, [names])
   const week = useMemo(() => (date ? weekDays(date) : null), [date])
   const set = (d: number, patch: Partial<DayRec>) => setDays((p) => p.map((day, i) => (i === d ? { ...day, ...patch } : day)))
 

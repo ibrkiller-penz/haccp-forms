@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useRecordState } from '../store/records'
 import SignLine from '../components/SignLine'
 import DatePick from '../components/DatePick'
 import CheckboxChar from '../components/CheckboxChar'
@@ -30,12 +31,12 @@ const makeRows = (labels: string[]): Row[] =>
 
 export default function CleaningWeekly({ date, grayscale, names, holidays, onDateChange }: FormProps) {
   const saved = getSettings().cleaningItems
-  const [checker, setChecker] = useState(names?.checker ?? '')
-  const [daily, setDaily] = useState<Row[]>(makeRows(saved?.daily ?? DAILY_ITEMS_DEFAULT))
-  const [weekly, setWeekly] = useState<Row[]>(makeRows(saved?.weekly ?? WEEKLY_ITEMS_DEFAULT))
+  const [checker, setChecker] = useRecordState('checker', names?.checker ?? '')
+  const [daily, setDaily] = useRecordState<Row[]>('daily', makeRows(saved?.daily ?? DAILY_ITEMS_DEFAULT))
+  const [weekly, setWeekly] = useRecordState<Row[]>('weekly', makeRows(saved?.weekly ?? WEEKLY_ITEMS_DEFAULT))
   const [editing, setEditing] = useState(false)
 
-  useEffect(() => setChecker(names?.checker ?? ''), [names])
+  useEffect(() => { if (names) setChecker(names.checker) }, [names])
 
   const week = useMemo(() => (date ? weekDays(date) : null), [date])
 

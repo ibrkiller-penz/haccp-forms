@@ -14,6 +14,7 @@ export default function AppHeader() {
       <nav className="app-nav">
         <NavLink to="/" end>서식 목록</NavLink>
         <NavLink to="/batch">일괄 인쇄</NavLink>
+        <NavLink to="/records">저장된 기록</NavLink>
         <NavLink to="/settings">설정</NavLink>
       </nav>
     </header>

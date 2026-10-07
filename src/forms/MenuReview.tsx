@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useRecordState } from '../store/records'
 import CheckboxChar from '../components/CheckboxChar'
 import DatePick from '../components/DatePick'
 import type { FormProps } from './types'
@@ -20,13 +21,13 @@ const MEALS_PER_DAY = ['조식', '중식', '중식', '중식', '석식']
 const makeDay = () => MEALS_PER_DAY.map((type) => ({ type, menuName: '', sanitize: false, heat: false }))
 
 export default function MenuReview({ date, grayscale, names, holidays, onDateChange }: FormProps) {
-  const [writer, setWriter] = useState(names?.writer ?? '')
-  const [confirmer, setConfirmer] = useState(names?.confirmer ?? '')
-  const [confirmDate, setConfirmDate] = useState('')
-  const [days, setDays] = useState<MealEntry[][]>(WEEKDAYS_KO.map(makeDay))
-  const [animalExclude, setAnimalExclude] = useState(false)
+  const [writer, setWriter] = useRecordState('writer', names?.writer ?? '')
+  const [confirmer, setConfirmer] = useRecordState('confirmer', names?.confirmer ?? '')
+  const [confirmDate, setConfirmDate] = useRecordState('confirmDate', '')
+  const [days, setDays] = useRecordState<MealEntry[][]>('days', WEEKDAYS_KO.map(makeDay))
+  const [animalExclude, setAnimalExclude] = useRecordState('animalExclude', false)
 
-  useEffect(() => { setWriter(names?.writer ?? ''); setConfirmer(names?.confirmer ?? '') }, [names])
+  useEffect(() => { if (names) { setWriter(names.writer); setConfirmer(names.confirmer) } }, [names])
 
   const week = useMemo(() => (date ? weekDays(date) : null), [date])
   const period = date && week

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRecordState } from '../store/records'
 import type { FormProps } from './types'
 import CheckboxChar from '../components/CheckboxChar'
 import { RecordTitle, MealDateHeader, ConfirmBlock, MgmtTable, RowControls, CellInput, type MealType } from './RecordParts'
@@ -10,10 +10,10 @@ const KEYS: (keyof Row)[] = ['dish', 'ingredient', 'method', 'pre', 'kitchen', '
 const MAX = 12
 
 export default function CCP1A({ date, grayscale, names, onDateChange }: FormProps) {
-  const [meal, setMeal] = useState<MealType>('중')
-  const [rows, setRows] = useState<Row[]>(Array.from({ length: 8 }, emptyRow))
-  const [toolCheck, setToolCheck] = useState(false)
-  const [bigo, setBigo] = useState('')
+  const [meal, setMeal] = useRecordState<MealType>('meal', '중')
+  const [rows, setRows] = useRecordState<Row[]>('rows', Array.from({ length: 8 }, emptyRow))
+  const [toolCheck, setToolCheck] = useRecordState('toolCheck', false)
+  const [bigo, setBigo] = useRecordState('bigo', '')
   const set = (i: number, k: keyof Row, v: string) => setRows((p) => p.map((r, idx) => (idx === i ? { ...r, [k]: v } : r)))
 
   return (

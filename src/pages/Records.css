@@ -1,0 +1,3 @@
+.records-main { max-width: 960px; }
+.rec-link { font-weight: 700; color: var(--text-main); text-decoration: none; }
+.rec-link:hover { color: var(--primary); }

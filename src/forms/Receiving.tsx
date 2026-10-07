@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useRecordState } from '../store/records'
 import type { FormProps } from './types'
 import DatePick from '../components/DatePick'
 import '../print.css'
@@ -31,11 +32,11 @@ const DEFAULT_ROWS = 10
 const MAX_ROWS = 16
 
 export default function Receiving({ date, grayscale, names, onDateChange }: FormProps) {
-  const [inspector, setInspector] = useState(names?.checker ?? '')
-  const [inspector2, setInspector2] = useState('')
-  const [rows, setRows] = useState<ReceivingRow[]>(Array.from({ length: DEFAULT_ROWS }, emptyRow))
+  const [inspector, setInspector] = useRecordState('checker', names?.checker ?? '')
+  const [inspector2, setInspector2] = useRecordState('inspector2', '')
+  const [rows, setRows] = useRecordState<ReceivingRow[]>('rows', Array.from({ length: DEFAULT_ROWS }, emptyRow))
 
-  useEffect(() => setInspector(names?.checker ?? ''), [names])
+  useEffect(() => { if (names) setInspector(names.checker) }, [names])
 
   const dateStr = date
     ? `${date.getFullYear()}년 ${String(date.getMonth() + 1).padStart(2, '0')}월 ${String(date.getDate()).padStart(2, '0')}일`

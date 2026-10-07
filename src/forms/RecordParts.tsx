@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useRecordState } from '../store/records'
 import type { RoleNames } from '../store/settings'
 import { dayKo, fmtMD, pad } from '../lib/dates'
 import DatePick from '../components/DatePick'
@@ -50,9 +51,9 @@ export function WeekHeader({ monday, checker, onChecker, onDateChange }: { monda
 
 /** 확인자 서명 / 확인일자 */
 export function ConfirmBlock({ names, paren }: { names: RoleNames | null; paren?: boolean }) {
-  const [name, setName] = useState(names?.confirmer ?? '')
-  const [d, setD] = useState('')
-  useEffect(() => setName(names?.confirmer ?? ''), [names])
+  const [name, setName] = useRecordState('confirmName', names?.confirmer ?? '')
+  const [d, setD] = useRecordState('confirmDate', '')
+  useEffect(() => { if (names) setName(names.confirmer) }, [names])
   return (
     <div className="record-confirm">
       확인자{paren ? ' : (' : ' 서명 :'} <input className="confirm-input" value={name} onChange={(e) => setName(e.target.value)} />{paren ? ' )' : ''}<br />

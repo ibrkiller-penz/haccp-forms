@@ -3,6 +3,7 @@ import AppHeader from '../components/AppHeader'
 import PrintOptionsPanel, { type PrintOptions } from '../components/PrintOptionsPanel'
 import { FORMS, matchesSchoolType, weeklySetIds } from '../forms/registry'
 import { useSettings, holidayMap } from '../store/settings'
+import { RecordContext, recordKey } from '../store/records'
 import { toMonday } from '../lib/dates'
 import '../print.css'
 import './BatchPrint.css'
@@ -73,14 +74,15 @@ export default function BatchPrint() {
               : f.dateMode === 'weekly' ? toMonday(options.date)
               : options.date
             return (
-              <f.Component
-                key={f.id}
-                date={date}
-                grayscale={options.grayscale}
-                names={options.autoFill ? options.names : null}
-                schoolName={s.schoolName}
-                holidays={holidays}
-              />
+              <RecordContext.Provider key={f.id} value={recordKey(f.id, date)}>
+                <f.Component
+                  date={date}
+                  grayscale={options.grayscale}
+                  names={options.autoFill ? options.names : null}
+                  schoolName={s.schoolName}
+                  holidays={holidays}
+                />
+              </RecordContext.Provider>
             )
           })}
         </Suspense>

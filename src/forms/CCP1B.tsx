@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRecordState } from '../store/records'
 import type { FormProps } from './types'
 import CheckboxChar from '../components/CheckboxChar'
 import { RecordTitle, MealDateHeader, ConfirmBlock, MgmtTable, CellInput, type MealType } from './RecordParts'
@@ -9,12 +9,12 @@ const emptyRow = (): Row => ({ method: '', time: '', temp: '', disinfect: '', si
 const KEYS: (keyof Row)[] = ['method', 'time', 'temp', 'disinfect', 'sign']
 
 export default function CCP1B({ date, grayscale, names, onDateChange }: FormProps) {
-  const [meal, setMeal] = useState<MealType>('중')
-  const [pre, setPre] = useState<Row[]>(Array.from({ length: 5 }, emptyRow))
-  const [cook, setCook] = useState<Row[]>(Array.from({ length: 7 }, emptyRow))
-  const [toolCheck, setToolCheck] = useState(false)
-  const [tableClean, setTableClean] = useState('')
-  const [bigo, setBigo] = useState('')
+  const [meal, setMeal] = useRecordState<MealType>('meal', '중')
+  const [pre, setPre] = useRecordState<Row[]>('pre', Array.from({ length: 5 }, emptyRow))
+  const [cook, setCook] = useRecordState<Row[]>('cook', Array.from({ length: 7 }, emptyRow))
+  const [toolCheck, setToolCheck] = useRecordState('toolCheck', false)
+  const [tableClean, setTableClean] = useRecordState('tableClean', '')
+  const [bigo, setBigo] = useRecordState('bigo', '')
 
   const renderRows = (rows: Row[], setRows: React.Dispatch<React.SetStateAction<Row[]>>, label: string) =>
     rows.map((row, i) => (

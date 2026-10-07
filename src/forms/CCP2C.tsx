@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRecordState } from '../store/records'
 import type { FormProps } from './types'
 import { RecordTitle, MealDateHeader, ConfirmBlock, MgmtTable, RowControls, CellInput, type MealType } from './RecordParts'
 import '../print.css'
@@ -9,9 +9,9 @@ const KEYS: (keyof Row)[] = ['name', 'mix', 'done', 'loadTemp', 'served', 'sTemp
 const MAX = 12
 
 export default function CCP2C({ date, grayscale, names, onDateChange }: FormProps) {
-  const [meal, setMeal] = useState<MealType>('중')
-  const [rows, setRows] = useState<Row[]>(Array.from({ length: 6 }, emptyRow))
-  const [bigo, setBigo] = useState('')
+  const [meal, setMeal] = useRecordState<MealType>('meal', '중')
+  const [rows, setRows] = useRecordState<Row[]>('rows', Array.from({ length: 6 }, emptyRow))
+  const [bigo, setBigo] = useRecordState('bigo', '')
   const set = (i: number, k: keyof Row, v: string) => setRows((p) => p.map((r, idx) => (idx === i ? { ...r, [k]: v } : r)))
 
   return (

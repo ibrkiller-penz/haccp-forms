@@ -52,6 +52,7 @@ export default function Home() {
           </div>
           <div className="home-actions">
             <Link to="/batch" className="btn btn-primary btn-lg">🖨️ 일괄 인쇄 · 주간 세트</Link>
+            <Link to="/records" className="btn btn-lg">🗂️ 저장된 기록</Link>
             <Link to="/settings" className="btn btn-lg">⚙️ 설정</Link>
           </div>
         </div>

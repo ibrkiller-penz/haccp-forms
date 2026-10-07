@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useRecordState } from '../store/records'
 import SignLine from '../components/SignLine'
 import DatePick from '../components/DatePick'
 import type { FormProps } from './types'
@@ -86,12 +87,12 @@ const EMPTY_RECORDS = (): RowRecord[] =>
 const SYMBOLS = ['○', '△', '×', '-']
 
 export default function DailyHygiene({ date, grayscale, names, schoolName, holidays, onDateChange }: FormProps) {
-  const [school, setSchool] = useState(schoolName)
-  const [checker, setChecker] = useState(names?.checker ?? '')
-  const [records, setRecords] = useState<RowRecord[]>(EMPTY_RECORDS())
+  const [school, setSchool] = useRecordState('school', schoolName)
+  const [checker, setChecker] = useRecordState('checker', names?.checker ?? '')
+  const [records, setRecords] = useRecordState<RowRecord[]>('records', EMPTY_RECORDS())
 
-  useEffect(() => setSchool(schoolName), [schoolName])
-  useEffect(() => setChecker(names?.checker ?? ''), [names])
+  useEffect(() => { if (schoolName) setSchool(schoolName) }, [schoolName])
+  useEffect(() => { if (names) setChecker(names.checker) }, [names])
 
   const week = useMemo(() => (date ? weekDays(date) : null), [date])
 
