@@ -76,9 +76,9 @@
   font-size: 14px;
 }
 
-.btn-print { margin-left: auto; }
+.print-btns { margin-left: auto; display: flex; gap: 6px; }
 
 @media (max-width: 640px) {
   .print-options-panel { top: 62px; }
-  .btn-print { margin-left: 0; }
+  .print-btns { margin-left: 0; }
 }

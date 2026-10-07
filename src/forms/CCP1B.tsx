@@ -8,7 +8,7 @@ interface Row { method: string; time: string; temp: string; disinfect: string; s
 const emptyRow = (): Row => ({ method: '', time: '', temp: '', disinfect: '', sign: '' })
 const KEYS: (keyof Row)[] = ['method', 'time', 'temp', 'disinfect', 'sign']
 
-export default function CCP1B({ date, grayscale, names }: FormProps) {
+export default function CCP1B({ date, grayscale, names, onDateChange }: FormProps) {
   const [meal, setMeal] = useState<MealType>('중')
   const [pre, setPre] = useState<Row[]>(Array.from({ length: 5 }, emptyRow))
   const [cook, setCook] = useState<Row[]>(Array.from({ length: 7 }, emptyRow))
@@ -29,7 +29,7 @@ export default function CCP1B({ date, grayscale, names }: FormProps) {
   return (
     <div className={`form-container${grayscale ? ' grayscale' : ''}`} data-printable>
       <RecordTitle>CCP1B. 식품취급 및 조리 <span style={{ fontWeight: 'normal', fontSize: '0.85rem' }}>(장소 구분이 안 되는 경우)</span></RecordTitle>
-      <MealDateHeader date={date} mealType={meal} onMealType={setMeal} />
+      <MealDateHeader date={date} mealType={meal} onMealType={setMeal} onDateChange={onDateChange} />
 
       <table className="record-table">
         <thead>

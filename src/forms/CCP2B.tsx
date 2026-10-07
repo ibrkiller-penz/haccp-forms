@@ -8,7 +8,7 @@ const emptyRow = (): Row => ({ name: '', mix: '', done: '', served: '', in2h: ''
 const KEYS: (keyof Row)[] = ['name', 'mix', 'done', 'served', 'in2h', 'tool', 'uniform', 'place', 'sign']
 const MAX = 14
 
-export default function CCP2B({ date, grayscale, names }: FormProps) {
+export default function CCP2B({ date, grayscale, names, onDateChange }: FormProps) {
   const [meal, setMeal] = useState<MealType>('중')
   const [rows, setRows] = useState<Row[]>(Array.from({ length: 9 }, emptyRow))
   const [bigo, setBigo] = useState('')
@@ -17,7 +17,7 @@ export default function CCP2B({ date, grayscale, names }: FormProps) {
   return (
     <div className={`form-container${grayscale ? ' grayscale' : ''}`} data-printable>
       <RecordTitle>CCP2B. 조리완료 및 배식 <span style={{ fontWeight: 'normal', fontSize: '0.85rem' }}>(단독조리 : 교실배식)</span></RecordTitle>
-      <MealDateHeader date={date} mealType={meal} onMealType={setMeal} />
+      <MealDateHeader date={date} mealType={meal} onMealType={setMeal} onDateChange={onDateChange} />
 
       <table className="record-table">
         <thead>

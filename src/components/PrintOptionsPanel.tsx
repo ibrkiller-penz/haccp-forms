@@ -121,7 +121,10 @@ export default function PrintOptionsPanel({ options, onChange, dateMode, formId,
 
         {children}
 
-        <button type="button" onClick={onPrint} className="btn-primary btn-print">🖨️ 인쇄</button>
+        <div className="print-btns">
+          <button type="button" onClick={onPrint} className="btn-primary">🖨️ 인쇄</button>
+          <button type="button" onClick={onPrint} className="btn-blue" title="인쇄 대화상자에서 대상(프린터)을 'PDF로 저장'으로 고르면 PDF 파일로 저장됩니다. 파일명은 서식명+날짜로 자동 제안됩니다.">📄 PDF 저장</button>
+        </div>
       </div>
       {(holidayNote || (s.calendar && dateMode !== 'none')) && (
         <div className="print-options-sub">

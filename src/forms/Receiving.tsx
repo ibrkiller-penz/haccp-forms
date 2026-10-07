@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { FormProps } from './types'
+import DatePick from '../components/DatePick'
 import '../print.css'
 import './records-common.css'
 
@@ -29,7 +30,7 @@ const FIELDS: { key: keyof ReceivingRow; label: string; width: string }[] = [
 const DEFAULT_ROWS = 10
 const MAX_ROWS = 16
 
-export default function Receiving({ date, grayscale, names }: FormProps) {
+export default function Receiving({ date, grayscale, names, onDateChange }: FormProps) {
   const [inspector, setInspector] = useState(names?.checker ?? '')
   const [inspector2, setInspector2] = useState('')
   const [rows, setRows] = useState<ReceivingRow[]>(Array.from({ length: DEFAULT_ROWS }, emptyRow))
@@ -50,7 +51,7 @@ export default function Receiving({ date, grayscale, names }: FormProps) {
       </div>
 
       <div className="record-header" style={{ textAlign: 'left' }}>
-        검수일자 : {dateStr}<br />
+        검수일자 : <DatePick date={date} onChange={onDateChange}>{dateStr}</DatePick><br />
         검 수 자 : <input className="meta-input" value={inspector} onChange={(e) => setInspector(e.target.value)} /> (인)
         &nbsp;&nbsp;<input className="meta-input" value={inspector2} onChange={(e) => setInspector2(e.target.value)} /> (인)
       </div>

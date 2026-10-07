@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import CheckboxChar from '../components/CheckboxChar'
+import DatePick from '../components/DatePick'
 import type { FormProps } from './types'
 import { toKey } from './types'
 import { WEEKDAYS_KO, weekDays, pad } from '../lib/dates'
@@ -18,7 +19,7 @@ const MEALS_PER_DAY = ['조식', '중식', '중식', '중식', '석식']
 
 const makeDay = () => MEALS_PER_DAY.map((type) => ({ type, menuName: '', sanitize: false, heat: false }))
 
-export default function MenuReview({ date, grayscale, names, holidays }: FormProps) {
+export default function MenuReview({ date, grayscale, names, holidays, onDateChange }: FormProps) {
   const [writer, setWriter] = useState(names?.writer ?? '')
   const [confirmer, setConfirmer] = useState(names?.confirmer ?? '')
   const [confirmDate, setConfirmDate] = useState('')
@@ -42,7 +43,7 @@ export default function MenuReview({ date, grayscale, names, holidays }: FormPro
       </div>
 
       <div className="record-header">
-        급식일자 : {period}<br />
+        급식일자 : <DatePick date={date} onChange={onDateChange}>{period}</DatePick><br />
         작성자 : ( <input className="meta-input wide" value={writer} onChange={(e) => setWriter(e.target.value)} /> )
       </div>
 

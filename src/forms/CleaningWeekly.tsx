@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import SignLine from '../components/SignLine'
+import DatePick from '../components/DatePick'
 import CheckboxChar from '../components/CheckboxChar'
 import type { FormProps } from './types'
 import { toKey } from './types'
@@ -27,7 +28,7 @@ interface Row {
 const makeRows = (labels: string[]): Row[] =>
   labels.map((label) => ({ label, checked: [false, false, false, false, false], assignee: '', action: '' }))
 
-export default function CleaningWeekly({ date, grayscale, names, holidays }: FormProps) {
+export default function CleaningWeekly({ date, grayscale, names, holidays, onDateChange }: FormProps) {
   const saved = getSettings().cleaningItems
   const [checker, setChecker] = useState(names?.checker ?? '')
   const [daily, setDaily] = useState<Row[]>(makeRows(saved?.daily ?? DAILY_ITEMS_DEFAULT))
@@ -106,7 +107,7 @@ export default function CleaningWeekly({ date, grayscale, names, holidays }: For
       <div className="form-title">주(일)별 세척·청소 점검표</div>
 
       <div className="form-meta-row">
-        <span>점검기간: <span className="meta-value">{date ? fmtWeekPeriod(date) : '20    .    .    . ~ 20    .    .    .'}</span></span>
+        <span>점검기간: <DatePick date={date} onChange={onDateChange}>{date ? fmtWeekPeriod(date) : '20    .    .    . ~ 20    .    .    .'}</DatePick></span>
         <span>점검자: <input className="meta-input" value={checker} onChange={(e) => setChecker(e.target.value)} /></span>
         <span className="no-print" style={{ marginLeft: 'auto', display: 'flex', gap: 4 }}>
           {editing ? (

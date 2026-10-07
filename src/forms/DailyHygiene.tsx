@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import SignLine from '../components/SignLine'
+import DatePick from '../components/DatePick'
 import type { FormProps } from './types'
 import { toKey } from './types'
 import { WEEKDAYS_KO, weekDays, fmtWeekPeriod, pad } from '../lib/dates'
@@ -84,7 +85,7 @@ const EMPTY_RECORDS = (): RowRecord[] =>
 
 const SYMBOLS = ['○', '△', '×', '-']
 
-export default function DailyHygiene({ date, grayscale, names, schoolName, holidays }: FormProps) {
+export default function DailyHygiene({ date, grayscale, names, schoolName, holidays, onDateChange }: FormProps) {
   const [school, setSchool] = useState(schoolName)
   const [checker, setChecker] = useState(names?.checker ?? '')
   const [records, setRecords] = useState<RowRecord[]>(EMPTY_RECORDS())
@@ -119,7 +120,7 @@ export default function DailyHygiene({ date, grayscale, names, schoolName, holid
       <div className="form-meta-row">
         <span>
           점검일자:{' '}
-          <span className="meta-value">{date ? fmtWeekPeriod(date) : '20    .    .    . ~ 20    .    .    .'}</span>
+          <DatePick date={date} onChange={onDateChange}>{date ? fmtWeekPeriod(date) : '20    .    .    . ~ 20    .    .    .'}</DatePick>
         </span>
         <span>
           점검자: <input className="meta-input" type="text" value={checker} onChange={(e) => setChecker(e.target.value)} />

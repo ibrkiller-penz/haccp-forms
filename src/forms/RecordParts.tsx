@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { RoleNames } from '../store/settings'
 import { dayKo, fmtMD, pad } from '../lib/dates'
+import DatePick from '../components/DatePick'
 import './records-common.css'
 
 export const MEAL_TYPES = ['조', '중', '석'] as const
@@ -17,12 +18,12 @@ export function RecordTitle({ children, small }: { children: React.ReactNode; sm
 }
 
 /** 급식일자 : 20xx. xx. xx.( x요일)(조·중·석)식 */
-export function MealDateHeader({ date, mealType, onMealType }: { date: Date | null; mealType: MealType; onMealType: (m: MealType) => void }) {
+export function MealDateHeader({ date, mealType, onMealType, onDateChange }: { date: Date | null; mealType: MealType; onMealType: (m: MealType) => void; onDateChange?: (d: Date) => void }) {
   const dateStr = date ? `${date.getFullYear()}. ${pad(date.getMonth() + 1)}. ${pad(date.getDate())}.` : '20    .    .    .'
   const dow = date ? `(${dayKo(date)}요일)` : '(   요일)'
   return (
     <div className="record-header">
-      급식일자 : {dateStr}{dow} (
+      급식일자 : <DatePick date={date} onChange={onDateChange}>{dateStr}{dow}</DatePick> (
       {MEAL_TYPES.map((t, i) => (
         <span key={t}>
           <button type="button" className={`meal-btn no-print${mealType === t ? ' on' : ''}`} onClick={() => onMealType(t)}>{t}</button>
@@ -36,13 +37,13 @@ export function MealDateHeader({ date, mealType, onMealType }: { date: Date | nu
 }
 
 /** 점검기간 / 점검자 (주간 기록지) */
-export function WeekHeader({ monday, checker, onChecker }: { monday: Date | null; checker: string; onChecker: (v: string) => void }) {
+export function WeekHeader({ monday, checker, onChecker, onDateChange }: { monday: Date | null; checker: string; onChecker: (v: string) => void; onDateChange?: (d: Date) => void }) {
   const period = monday
     ? `${monday.getFullYear()}. ${fmtMD(monday).replace('/', '. ')}. ~ ${fmtMD(new Date(monday.getTime() + 4 * 86400000)).replace('/', '. ')}.`
     : '20    .    .    . ~    .    .'
   return (
     <div className="record-header">
-      점검기간 : {period}&nbsp;&nbsp; 점검자 : <input className="meta-input" value={checker} onChange={(e) => onChecker(e.target.value)} />
+      점검기간 : <DatePick date={monday} onChange={onDateChange}>{period}</DatePick>&nbsp;&nbsp; 점검자 : <input className="meta-input" value={checker} onChange={(e) => onChecker(e.target.value)} />
     </div>
   )
 }

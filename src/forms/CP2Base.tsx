@@ -22,7 +22,7 @@ const CRITERIA: Record<CP2Variant, [string, string, string]> = {
   C: ['• 식기소독고 내 식판 온도 71℃ 이상', '• 식기소독고 설정 온도, 시간 확인', '• 식기소독고 온도, 시간 보정'],
 }
 
-export default function CP2Base({ variant, date, grayscale, names, holidays }: FormProps & { variant: CP2Variant }) {
+export default function CP2Base({ variant, date, grayscale, names, holidays, onDateChange }: FormProps & { variant: CP2Variant }) {
   const [checker, setChecker] = useState(names?.checker ?? '')
   const [days, setDays] = useState<DayRec[]>(WEEKDAYS_KO.map(emptyDay))
   const [agent, setAgent] = useState('')
@@ -43,7 +43,7 @@ export default function CP2Base({ variant, date, grayscale, names, holidays }: F
   return (
     <div className={`form-container${grayscale ? ' grayscale' : ''}`} data-printable>
       <RecordTitle small>{title}<br /><span style={{ fontWeight: 'normal', fontSize: '0.8rem' }}>{sub}</span></RecordTitle>
-      <WeekHeader monday={date} checker={checker} onChecker={setChecker} />
+      <WeekHeader monday={date} checker={checker} onChecker={setChecker} onDateChange={onDateChange} />
 
       <table className="record-table">
         <thead>

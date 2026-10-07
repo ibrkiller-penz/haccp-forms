@@ -5,7 +5,7 @@ import PrintOptionsPanel, { type PrintOptions } from '../components/PrintOptions
 import { getForm } from '../forms/registry'
 import { toKey } from '../forms/types'
 import { useSettings, pushRecent, holidayMap } from '../store/settings'
-import { addDays, nextWeekday } from '../lib/dates'
+import { addDays, nextWeekday, toMonday } from '../lib/dates'
 import '../print.css'
 
 export default function FormPage() {
@@ -24,6 +24,14 @@ export default function FormPage() {
   useEffect(() => {
     if (form) pushRecent(form.id)
   }, [form])
+
+  // PDF로 저장 시 파일명 = 서식명 + 날짜
+  useEffect(() => {
+    if (!form) return
+    const d = options.date ? ` ${toKey(options.date)}` : ''
+    document.title = `${form.title}${d}`
+    return () => { document.title = '급식 위생 점검표 출력' }
+  }, [form, options.date])
 
   if (!form) {
     return (
@@ -77,6 +85,7 @@ export default function FormPage() {
               names={options.autoFill ? options.names : null}
               schoolName={s.schoolName}
               holidays={holidays}
+              onDateChange={i === 0 ? (d) => setOptions((o) => ({ ...o, date: dateMode === 'weekly' ? toMonday(d) : d })) : undefined}
             />
           ))}
         </Suspense>

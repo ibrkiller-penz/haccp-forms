@@ -10,7 +10,7 @@ interface Slot { fridge: string; preserve: string; freezer: string }
 interface DayRec { slots: Slot[]; clean: string; cover: string; separate: string; sign: string }
 const emptyDay = (): DayRec => ({ slots: TIMES.map(() => ({ fridge: '', preserve: '', freezer: '' })), clean: '', cover: '', separate: '', sign: '' })
 
-export default function CP1({ date, grayscale, names, holidays }: FormProps) {
+export default function CP1({ date, grayscale, names, holidays, onDateChange }: FormProps) {
   const [checker, setChecker] = useState(names?.checker ?? '')
   const [days, setDays] = useState<DayRec[]>(WEEKDAYS_KO.map(emptyDay))
   const [bigo, setBigo] = useState('')
@@ -25,7 +25,7 @@ export default function CP1({ date, grayscale, names, holidays }: FormProps) {
   return (
     <div className={`form-container${grayscale ? ' grayscale' : ''}`} data-printable>
       <RecordTitle>CP1. 냉장·냉동고(실) 온도관리</RecordTitle>
-      <WeekHeader monday={date} checker={checker} onChecker={setChecker} />
+      <WeekHeader monday={date} checker={checker} onChecker={setChecker} onDateChange={onDateChange} />
 
       <table className="record-table">
         <thead>
