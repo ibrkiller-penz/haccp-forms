@@ -1,60 +1,223 @@
+/* 급식당번(Smart Meal Scheduler) 테마 이식 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
 :root {
-  --color-primary: #c41e3a;
-  --color-primary-light: #e8a5b2;
-  --color-border: #333;
-  --color-text: #000;
-  --color-bg: #fff;
-  --color-bg-secondary: #f5f5f5;
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-50: #ecfdf5;
+  --primary-100: #d1fae5;
+  --accent-blue: #1d4ed8;
+  --accent-amber: #f59e0b;
+  --accent-purple: #7c3aed;
+  --accent-red: #dc2626;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-sub: #64748b;
+  --border-color: #cbd5e1;
+  --border-light: #e2e8f0;
+  --bg-page: #f1f5f9;
+  --bg-content: #f8fafc;
+  --bg-surface: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
 
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+  /* 서식 원본 색 */
+  --form-pink: #f5c6cb;
+  --form-red: #c41e3a;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body, #root {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-size: 16px;
   line-height: 1.5;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--text-main);
+  background-color: var(--bg-page);
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
 }
 
-button {
+a { color: var(--primary); }
+
+h1, h2, h3, h4 { margin: 0; font-weight: 800; letter-spacing: -0.01em; }
+
+/* ─── 버튼 ─── */
+button, .btn {
   font-family: inherit;
   cursor: pointer;
-  border: none;
-  padding: 0.5rem 1rem;
-  background-color: var(--color-primary);
-  color: white;
-  border-radius: 4px;
-  transition: opacity 0.2s;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 15px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.12s, box-shadow 0.15s;
+  white-space: nowrap;
 }
 
-button:hover {
-  opacity: 0.9;
-}
+button:hover, .btn:hover { background: #f8fafc; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+button:active, .btn:active { transform: translateY(0); }
+button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
 
-button:active {
-  opacity: 0.8;
+.btn-primary {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  border-color: #047857;
+  color: #fff;
+  font-weight: 800;
 }
+.btn-primary:hover { background: linear-gradient(135deg, #047857 0%, #065f46 100%); }
 
+.btn-blue { background: var(--accent-blue); border-color: #1e40af; color: #fff; }
+.btn-blue:hover { background: #1e40af; }
+
+.btn-danger { background: var(--accent-red); border-color: #b91c1c; color: #fff; }
+.btn-danger:hover { background: #b91c1c; }
+
+.btn-ghost { background: transparent; border-color: transparent; color: var(--text-muted); }
+.btn-ghost:hover { background: #f1f5f9; box-shadow: none; }
+
+.btn-sm { min-height: 30px; font-size: 13px; padding: 0 10px; border-radius: 6px; }
+.btn-lg { min-height: 44px; font-size: 16px; padding: 0 20px; }
+
+/* ─── 입력 ─── */
 input, select, textarea {
   font-family: inherit;
-  padding: 0.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
+  font-size: 15px;
+  color: var(--text-main);
+  padding: 7px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--bg-surface);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); width: 16px; height: 16px; padding: 0; }
+label { cursor: pointer; }
+
+/* ─── 카드 ─── */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 16px;
 }
 
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: #fafbfc;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 17.5px;
+  font-weight: 800;
+}
+
+.card-head .card-actions { margin-left: auto; display: flex; gap: 8px; }
+
+.card-body { padding: 18px; }
+
+.card-num-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--primary);
+}
+.card-num-badge.red { background: var(--accent-red); }
+.card-num-badge.blue { background: var(--accent-blue); }
+.card-num-badge.orange { background: var(--accent-amber); }
+.card-num-badge.purple { background: var(--accent-purple); }
+.card-num-badge.green { background: var(--primary); }
+
+.card-theme-green { background: #f0fdf4; border: 1.5px solid #86efac; }
+.card-theme-green .card-head { background: #d1fae5; color: #065f46; }
+.card-theme-blue { background: #eff6ff; border: 1.5px solid #93c5fd; }
+.card-theme-blue .card-head { background: #dbeafe; color: #1e3a8a; }
+.card-theme-orange { background: #fffbeb; border: 1.5px solid #fcd34d; }
+.card-theme-orange .card-head { background: #fef3c7; color: #92400e; }
+.card-theme-purple { background: #f5f3ff; border: 1.5px solid #c4b5fd; }
+.card-theme-purple .card-head { background: #ede9fe; color: #4c1d95; }
+.card-theme-red { background: #fef2f2; border: 1.5px solid #fca5a5; }
+.card-theme-red .card-head { background: #fee2e2; color: #7f1d1d; }
+
+.card-inner-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+/* ─── 태그 ─── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+.tag-green { background: var(--primary-100); color: #065f46; border-color: #86efac; }
+.tag-blue { background: #dbeafe; color: #1e3a8a; border-color: #93c5fd; }
+.tag-red { background: #fee2e2; color: #7f1d1d; border-color: #fca5a5; }
+.tag-orange { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.tag-gray { background: #f1f5f9; color: #475569; }
+
+/* ─── 공통 레이아웃 ─── */
+.page { min-height: 100vh; display: flex; flex-direction: column; }
+.page-content { flex: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 20px 16px 40px; }
+.muted { color: var(--text-muted); font-size: 14px; }
+.row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.field-label { display: block; font-size: 14px; font-weight: 700; color: var(--text-muted); margin: 10px 0 6px; }
+
+/* 세그먼트(학교급 선택 등) */
+.segmented { display: inline-flex; border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; }
+.segmented button { border: none; border-radius: 0; min-height: 36px; font-weight: 700; background: #fff; }
+.segmented button + button { border-left: 1px solid var(--border-color); }
+.segmented button.on { background: var(--primary-50); color: var(--primary-hover); }
+.segmented button:hover { transform: none; box-shadow: none; }
+
+/* 데이터 표 */
+.data-table { width: 100%; border-collapse: collapse; font-size: 14px; background: #fff; }
+.data-table th { background: #f1f5f9; color: #334155; font-weight: 700; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border-color); }
+.data-table td { padding: 6px 10px; border-bottom: 1px solid var(--border-light); vertical-align: middle; }
+.data-table tr:hover td { background: #f0fdf4; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
 @media print {
-  body {
-    background-color: white;
-  }
+  body { background: white; }
 }

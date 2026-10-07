@@ -1,0 +1,70 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 62px;
+  background: #fff;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 18px;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.app-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--primary-50);
+}
+
+.app-title {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.app-title em {
+  font-style: normal;
+  color: var(--primary);
+}
+
+.app-school {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+
+.app-nav a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 7px 12px;
+  border-radius: 6px;
+}
+
+.app-nav a:hover { background: #f1f5f9; }
+.app-nav a.active { background: #e6f9f0; color: #047857; }
+
+@media (max-width: 640px) {
+  .app-header { padding: 0 10px; gap: 8px; }
+  .app-title { font-size: 16px; }
+  .app-school { display: none; }
+  .app-nav a { padding: 6px 8px; font-size: 14px; }
+}

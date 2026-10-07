@@ -1,0 +1,23 @@
+.batch-picker { max-width: 960px; margin: 0 auto 16px; }
+
+.batch-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 6px;
+}
+
+.batch-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  background: #fff;
+}
+
+.batch-item.on { border-color: #86efac; background: #f0fdf4; }
+.batch-item small { color: var(--text-sub); margin-left: auto; font-size: 12px; font-weight: 500; }

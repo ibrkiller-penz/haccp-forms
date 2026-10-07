@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "smart-edu-haccp"
+  },
+  "targets": {
+    "smart-edu-haccp": {
+      "hosting": {
+        "forms": ["haccp-forms"]
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+.cleaning-weekly .form-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.4rem;
+  margin-bottom: 0.4rem;
+  border: 2px solid #000;
+}
+
+.cleaning-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.72rem;
+  margin-top: 0.3rem;
+  border: 0.5mm solid #000;
+}
+
+.cleaning-table th,
+.cleaning-table td {
+  border: 0.25mm solid #000;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.05rem 0.15rem;
+  height: 5.7mm;
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.cleaning-table .form-header-row th {
+  background-color: #f5c6cb;
+  font-weight: bold;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.cleaning-weekly.grayscale .cleaning-table .form-header-row th {
+  background-color: #d0d0d0 !important;
+}
+
+.col-section { width: 7mm; font-weight: bold; white-space: pre-line; }
+.section-cell { background-color: #fef9e7; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.cleaning-weekly.grayscale .section-cell { background-color: #f0f0f0 !important; }
+
+.col-item { width: 38mm; }
+.col-assignee { width: 16mm; }
+.col-day-hd, .col-day { width: 9mm; }
+.col-edit { width: 18mm; }
+
+.day-date { font-size: 0.6rem; font-weight: normal; }
+.day-holiday { font-size: 0.58rem; color: #c41e3a; font-weight: normal; }
+
+.check-cell { padding: 0; }
+
+.check-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  min-height: 0;
+  border: 1px solid #555;
+  border-radius: 2px;
+  background: #fff;
+  font-size: 0.7rem;
+  color: #c0392b;
+  padding: 0;
+}
+
+.check-btn:hover { transform: none; box-shadow: none; background: #fde8ea; }
+
+.assignee-input, .action-input {
+  width: 100%;
+  border: none;
+  border-bottom: 0.5px solid #999;
+  font-size: 0.68rem;
+  background: transparent;
+  outline: none;
+  padding: 0;
+  text-align: center;
+}
+
+.action-input { text-align: left; }
+.assignee-input:focus, .action-input:focus { box-shadow: none; }
+
+.label-input {
+  width: 100%;
+  border: 1px dashed #aaa;
+  font-size: 0.68rem;
+  padding: 0 2px;
+  background: #fffbe6;
+}
+
+.mini-btn {
+  min-height: 0;
+  padding: 0 3px;
+  font-size: 0.6rem;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  background: #fff;
+  margin: 0 1px;
+  font-weight: normal;
+}
+.mini-btn.danger { color: #c0392b; border-color: #c0392b; }
+.mini-btn:hover { transform: none; box-shadow: none; }
+
+.notice-row td { height: auto; text-align: left; padding: 0.2rem 0.4rem; font-size: 0.7rem; line-height: 1.45; }
+.notice-label { text-align: center !important; font-weight: bold; }
+
+.form-footnote { font-size: 0.7rem; margin-top: 0.3rem; color: #333; }
+
+@media print {
+  .check-btn { display: none !important; }
+  .assignee-input, .action-input { border-bottom: 0.5px solid #666; }
+  .label-input { border: none; background: transparent; }
+}

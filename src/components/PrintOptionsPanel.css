@@ -1,0 +1,84 @@
+.print-options-panel {
+  background: #fff;
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 16px;
+  position: sticky;
+  top: 62px;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.print-options-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.print-options-sub {
+  max-width: 1200px;
+  margin: 6px auto 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.back-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.panel-title { font-size: 15px; }
+
+.fav-btn {
+  min-height: 0;
+  background: none;
+  border: none;
+  color: #f59e0b;
+  font-size: 20px;
+  padding: 0 2px;
+  line-height: 1;
+}
+.fav-btn:not(.on) { color: #cbd5e1; }
+.fav-btn:hover { transform: none; box-shadow: none; }
+
+.option-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.option-label { font-weight: 700; color: var(--text-muted); white-space: nowrap; font-size: 13px; }
+
+.option-check {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.name-select { display: flex; align-items: center; gap: 3px; font-size: 13px; }
+.name-select select { padding: 4px 6px; font-size: 13px; }
+.hint-link { font-size: 13px; }
+
+.print-options-panel input[type="date"],
+.print-options-panel input[type="number"] {
+  padding: 5px 8px;
+  font-size: 14px;
+}
+
+.btn-print { margin-left: auto; }
+
+@media (max-width: 640px) {
+  .print-options-panel { top: 62px; }
+  .btn-print { margin-left: 0; }
+}

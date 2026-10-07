@@ -1,0 +1,18 @@
+.checkbox-char {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1.5px solid #000;
+  vertical-align: middle;
+  margin: 0 0.2rem;
+  box-sizing: border-box;
+}
+
+.checkbox-char.checked::after {
+  content: '✓';
+  display: block;
+  text-align: center;
+  line-height: 0.75rem;
+  font-size: 0.6rem;
+  font-weight: bold;
+}
